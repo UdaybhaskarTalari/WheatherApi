@@ -1,14 +1,10 @@
-# Use the official Python image as the base image
-FROM python:3
+# Use a lightweight web server as the base image
+FROM nginx:alpine
 
-# Set the working directory inside the container
-WORKDIR /app
+# Copy the website files to the container
+COPY . /usr/share/nginx/html
 
-# Copy your web application file into the container
-COPY app.py /app
+# Expose the port that Nginx will listen on (default is 80)
+EXPOSE 80
 
-# Expose the port that your web application is listening on (change this to the actual port number)
-EXPOSE 5000
-
-# Start your web application
-CMD ["python", "app.py"]
+# The default CMD of the Nginx image should start Nginx automatically, so no need to specify it explicitly.
